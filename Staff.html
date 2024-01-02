@@ -1,0 +1,38 @@
+
+<html>
+<head>
+    <title>Staff Management</title>
+</head>
+<body>
+
+    <h2>Staff List</h2>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        <c:forEach var="staff" items="${staffList}">
+            <tr>
+                <td>${staff.id}</td>
+                <td>${staff.name}</td>
+                <td>
+                    <a href="StaffServlet?action=update&id=${staff.id}">Update</a>
+                    <a href="StaffServlet?action=delete&id=${staff.id}">Delete</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+
+    <h2>Add/Update Staff</h2>
+
+    <form action="StaffServlet" method="post">
+        <input type="hidden" name="action" value="${empty param.id ? 'add' : 'update'}">
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="${empty param.id ? '' : staff.name}" required>
+        <input type="submit" value="${empty param.id ? 'Add' : 'Update'}">
+    </form>
+
+</body>
+</html>
